@@ -13,7 +13,7 @@ export async function GET() {
   const fileBuffer = fs.readFileSync(filePath);
   const workbook = XLSX.read(fileBuffer, { type: "buffer" });
   const sheet = workbook.Sheets[workbook.SheetNames[0]];
-  const data = XLSX.utils.sheet_to_json(sheet, { header: 1 }) as any[][];
+  const data = XLSX.utils.sheet_to_json(sheet, { header: 1 }) as (string | undefined)[][];
 
   if (!data || data.length === 0) {
     return NextResponse.json({ error: "Excel file is empty" }, { status: 400 });
